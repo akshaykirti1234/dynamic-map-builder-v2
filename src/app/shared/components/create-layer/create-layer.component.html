@@ -35,6 +35,12 @@
                     <label for="layerZipFile" class="form-label">Layer Name</label>
                     <input type="text" class="form-control" (change)="onLayerFileSelected($event)" id="layerZipFile">
                 </div>
+                <div class="mb-3">
+                    <label for="layerName" class="form-label">Add Style</label>
+                    <select class="form-select">
+                        <option value="" selected>-Select-</option>
+                    </select>
+                </div>
                 <button type="submit" class="btn btn-success w-25" [disabled]="layerForm.invalid">Submit</button>
             </form>
         </div>

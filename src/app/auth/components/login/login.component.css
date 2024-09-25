@@ -1,0 +1,15 @@
+label {
+    font-weight: bold;
+}
+
+span {
+    font-weight: bold;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

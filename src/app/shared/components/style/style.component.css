@@ -1,0 +1,19 @@
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+
+.btn {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+label {
+    color: rgb(121, 125, 128);
+    font-weight: bolder;
+}

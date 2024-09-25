@@ -1,0 +1,60 @@
+<div class="p-1">
+    <!-- Operation Buttons -->
+    <div class="d-flex gap-2 col-2 ">
+        <button class="btn w-50" [ngClass]="{'btn-success': mode === 'add', 'btn-danger': mode !== 'add'}"
+            (click)="setMode('add')">Add</button>
+        <button class="btn  w-50" [ngClass]="{'btn-success': mode === 'view', 'btn-danger': mode !== 'view'}"
+            (click)="setMode('view')">View</button>
+    </div>
+    <!-- Form for Add/Edit -->
+    <div *ngIf="mode === 'add'">
+        <div class="mt-4 border border-1 border-black p-3 bg-success-subtle">
+            <!-- style="height: calc(100vh - 180px);" -->
+            <!-- <h4 class="text-white p-2 rounded" style="background-color: teal;">
+                Upload Layer Zip File
+            </h4>
+            <hr> -->
+            <div class="w-50">
+                <form [formGroup]="groupForm">
+                    <!-- <div class="mb-3 text-danger text-center">
+                        <span><strong>Boundary Name: India</strong></span>
+                    </div> -->
+                    <div class="mb-3">
+                        <label class="form-label">Group Name</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-success w-25">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- List for View/Delete -->
+    <div *ngIf="mode === 'view'" class="table-responsive mt-3">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <!-- <th>Location Name</th> -->
+                    <th>Group Name</th>
+                    <th>Created On</th>
+                    <th>Updated On</th>
+                    <th class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- <tr *ngFor="let layer of layers">
+                    <td>{{layer.name}}</td>
+                    <td>{{layer.name}}</td>
+                    <td>{{layer.name}}</td>
+                    <td>{{layer.name}}</td>
+                    <td>{{layer.name}}</td>
+                    <td>{{layer.name}}</td>
+                    <td class="text-center"><button class="btn btn-primary"
+                            (click)="updateLayer(layer.id)">Update</button>
+                        &nbsp;
+                        <button class="btn btn-danger" (click)="deleteLayer(layer.id)">Delete</button>
+                    </td>
+                </tr> -->
+            </tbody>
+        </table>
+    </div>
+</div>

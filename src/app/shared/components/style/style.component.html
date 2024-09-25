@@ -1,0 +1,88 @@
+<div class="container form-control">
+    <form action="">
+        <div class="row mt-4">
+            <label class="col-sm-2 col-form-label">Group Name : </label>
+            <div class="col-sm-4">
+                <select name="group_name" id="group_name" class="form-control">
+                    <option value="">--choose--</option>
+                </select>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <label class="col-sm-2 col-form-label">Layer Name : </label>
+            <div class="col-sm-4">
+                <select name="layer_name" id="layer_name" class="form-control">
+                    <option value="">--choose--</option>
+                </select>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <label class="col-sm-2 col-form-label">Style Name : </label>
+            <div class="col-sm-4">
+                <input type="text" name="style_name" id="style_name" class="form-control">
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <label class="col-sm-2 col-form-label">Vector Type : </label>
+            <div class="col-sm-4">
+                <span name="vector_type" id="vector_type" class="form-control">Polygon</span>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-sm-4">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="stroke" id="stroke">
+                    <label class="form-check-label" for="stroke">Stroke</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label>Colors : </label>
+                <input type="color" value="#00CC99" name="stroke_color" id="stroke_color">
+                <!-- <img src="assets/img/color-wheel1.png" alt="" height="30px"> -->
+            </div>
+            <label class="col-sm-2 col-form-label">Width : </label>
+            <div class="col">
+                <input type="number" class="form-control" name="stroke_width" id="stroke_width">
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-sm-4">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="fill" id="fill">
+                    <label class="form-check-label" for="gridCheck1">Fill</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label>Colors : </label>
+                <input type="color" name="fill_color" id="fill_color">
+            </div>
+            <label class="col-sm-2 col-form-label">Opacity : </label>
+            <div class="col">
+                <input type="number" class="form-control" name="opacity" id="opacity">
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-sm-4">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="labelling" id="labelling">
+                    <label class="form-check-label" for="gridCheck1">Labelling</label>
+                </div>
+            </div>
+
+            <label class="col-sm-2 col-form-label">Field Name : </label>
+            <div class="col-sm-4">
+                <select name="field_name" id="field_name" class="form-control">
+                    <option value="">--choose--</option>
+                </select>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-md-4 control-label">
+                <div class="text-center " style="margin-top: 50px; margin-left:300px">
+                    <button class="btn btn-success">Submit</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

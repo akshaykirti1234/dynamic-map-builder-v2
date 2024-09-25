@@ -1,0 +1,40 @@
+<div class="container m-auto mt-5 row row-cols-lg-2 row-cols-md-2 row-cols-sm-1  shadow rounded rounded-5">
+    <div>
+        <form [formGroup]="loginForm" (ngSubmit)="saveForm()">
+            <div class="m-3">
+                <h3><span class="text-warning">/</span><span class="text-danger">/</span><span
+                        class="text-primary">/</span><span>CSM</span></h3>
+            </div>
+            <div class="d-flex flex-column gap-3 mt-4 p-5">
+                <div>
+                    <label for="">Email Id</label>
+                    <input formControlName="userEmail" type="text" class="form-control" autofocus autocomplete="on">
+                    <div *ngIf="loginForm.get('userEmail').invalid && (loginForm.get
+                        ('userEmail').dirty || loginForm.get('userEmail').touched)" class="text
+                        text-danger">
+                        <div *ngIf="loginForm.get('userEmail').errors.email">Invalid email</div>
+                    </div>
+                </div>
+                <div>
+                    <label for="">Password</label>
+                    <input formControlName="password" type="password" class="form-control">
+                </div>
+                <div>
+                    <button class="btn btn-primary w-100" [disabled]="loginForm.invalid">Login</button>
+                </div>
+                <div class="text-center">
+                    <p class="alert alert-danger" *ngIf="errMessage">{{errMessage}}</p>
+                </div>
+            </div>
+        </form>
+        <div class="d-flex gap-3 mb-5 justify-content-center">
+            <a href="">Home page</a>
+            <a href="">Forgot Password?</a>
+        </div>
+    </div>
+    <div class="d-none d-lg-block d-sm-block">
+        <img src="
+    https://img.freepik.com/premium-photo/guardian-digital-realm-mans-vigilance-login-gate_1134661-21407.jpg?size=626&ext=jpg&ga=GA1.1.548235171.1724835808&semt=ais_hybrid"
+            alt="" style=" width: 100%; object-fit: cover;">
+    </div>
+</div>

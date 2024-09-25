@@ -1,0 +1,108 @@
+<!-- <div class="component-container overflow-auto"> -->
+<div class="container-fluid p-0 d-flex min-vh-100">
+    <div id="bdSidebar" class="d-flex flex-column flex-shrink-0 p-3 text-white offcanvas-md offcanvas-start"
+        style="width: 250px;">
+        <div class="sidebar-header text-bg-light rounded rounded-pill text-center">
+            <!-- <span class="fs-5 d-sm-inline"><img src="./assets/images/CSMLOGO.jpg" style="object-fit: cover"
+                        height="70px" class="card-img-top rounded rounded-pill" /></span> -->
+            <h3><span class="text-warning">/</span><span class="text-danger">/</span><span
+                    class="text-primary">/</span><span><em>CSM Tech.</em></span></h3>
+        </div>
+        <hr />
+        <ul class="mynav nav nav-pills flex-column mb-auto" id="menu">
+            <!-- <li class="nav-item">
+                <a routerLink="boundary" routerLinkActive="active">
+                    Define Boundary
+                </a>
+            </li> -->
+            <li class="nav-item">
+                <a routerLink="group" routerLinkActive="active">
+                    Create Group
+                </a>
+            </li>
+            <!-- <li class="nav-item">
+                <a routerLinkActive="active">
+                    Geo DB
+                </a>
+            </li> -->
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="#geoDBDropdown" role="button" aria-expanded="false"
+                    aria-controls="geoDBDropdown">
+                    Geo DB
+                </a>
+                <div class="collapse" id="geoDBDropdown">
+                    <ul class="nav flex-column ms-3">
+                        <li class="nav-item">
+                            <a routerLink="new-data" routerLinkActive="active">
+                                New Data
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a routerLink="append" routerLinkActive="active">
+                                Append
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a routerLink="layer" routerLinkActive="active">
+                    Layers
+                </a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="style" routerLinkActive="active">
+                    Style Creation
+                </a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="preview" routerLinkActive="active">
+                    Layer Preview
+                </a>
+            </li>
+        </ul>
+        <hr />
+        <div class="d-flex">
+            <span>
+                <h6 class="mt-1 mb-0">&copy; Dynamic Map Builder</h6>
+            </span>
+        </div>
+    </div>
+
+    <div class="flex-fill">
+        <div class="p-2 d-md-none d-flex gap-3 text-white justify-content-between" style="background-color: #618ac9;">
+            <div>
+                <a href="#" class="text-white" data-bs-toggle="offcanvas" data-bs-target="#bdSidebar">
+                    <i class="fa-solid fa-bars"></i>
+                </a>
+                <span class="ms-3">Dynamic Map Builder</span>
+            </div>
+            <div class="d-flex gap-5">
+
+            </div>
+        </div>
+
+        <div class="">
+            <nav class="navbar navbar-expand-lg">
+                <div class="container-fluid">
+                    <div class="collapse navbar-collapse p-1" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <h4 class="font-weight-bold" style="color: #108fbb">Dynamic Map
+                                    Builder</h4>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav ms-auto">
+
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="mt-4 ms-5 me-5">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- </div> -->

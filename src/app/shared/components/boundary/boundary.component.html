@@ -1,0 +1,59 @@
+<div class="p-1">
+    <!-- Operation Buttons -->
+    <div class="d-flex gap-2 col-2 ">
+        <button class="btn w-50" [ngClass]="{'btn-success': mode === 'add', 'btn-danger': mode !== 'add'}"
+            (click)="setMode('add')">Add</button>
+        <button class="btn  w-50" [ngClass]="{'btn-success': mode === 'view', 'btn-danger': mode !== 'view'}"
+            (click)="setMode('view')">View</button>
+    </div>
+    <!-- Form for Add/Edit -->
+    <div *ngIf="mode === 'add'">
+        <div class="mt-4 border border-1 border-black p-3 bg-danger-subtle">
+            <!-- style="height: calc(100vh - 180px);" -->
+            <!-- <h4 class="text-white p-2 rounded" style="background-color: teal;">
+                Upload Layer Zip File
+            </h4>
+            <hr> -->
+            <div class="w-50">
+                <form [formGroup]="regionForm" (ngSubmit)="onRegionSubmit()">
+                    <div class="mb-3">
+                        <label for="regionName" class="form-label">Region Name</label>
+                        <input type="text" class="form-control" id="regionName" formControlName="regionName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="regionZipFile" class="form-label">Upload Region Zip File</label>
+                        <input type="file" class="form-control" (change)="onRegionFileSelected($event)"
+                            id="regionZipFile">
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn w-25"
+                            [ngClass]="regionForm.valid? 'btn-success':'btn-secondary'">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- List for View/Delete -->
+    <div *ngIf="mode === 'view'" class="table-responsive mt-3">
+        <table class="table table-bordered table-hover">
+            <thead style="background-color: red !important;">
+                <tr>
+                    <th> Name</th>
+                    <th>Created On</th>
+                    <th>Created By</th>
+                    <th class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let boundary of boundaries">
+                    <td>{{boundary.name}}</td>
+                    <td>{{boundary.filePath}}</td>
+                    <!-- <td class="text-center"><button class="btn btn-primary"
+                            (click)="updateboundary(boundary.id)">Update</button> &nbsp;
+                        <button class="btn btn-danger" (click)="deleteboundary(boundary.id)">Delete</button>
+                    </td> -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,132 @@
+/* .component-container{ 
+	height: 100%;
+}  */
+
+
+/* .mynav li a.active { 
+    color: #fff;
+    background: orange;
+}  */
+
+/* .mynav li a:hover { 
+	color: #7386D5;
+    background: #fff;
+}  */
+
+/* .mynav li a i { 
+	width: 25px; 
+	text-align: center; 
+}  */
+
+/* .notification-badge { 
+	background-color: rgba(255, 255, 255, 0.7); 
+	float: right; 
+	color: #222; 
+	font-size: 14px; 
+	padding: 0px 8px; 
+	border-radius: 2px; 
+} */
+
+.navbar {
+    /* padding: 15px 10px; */
+    background: #fff;
+    border: none;
+    border-radius: 0;
+    /* margin-bottom: 40px; */
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+#bdSidebar {
+    /* min-width: 250px; */
+    /* max-width: 250px; */
+    background: #618ac9 !important;
+    color: #fff;
+    transition: all 0.3s;
+}
+
+/* #bdSidebar.active {
+    margin-left: -250px;
+} */
+
+/* #sidebar .sidebar-header {
+    padding: 20px;
+} */
+
+/* 
+#bdSidebar ul.components {
+    padding: 20px 0;
+} */
+
+.mynav li a {
+    color: #fff;
+    text-decoration: none;
+    width: 100%;
+    display: block;
+    border-radius: 0px;
+    padding: 8px 5px;
+    /* font-size: medium; */
+}
+
+.mynav li a.active {
+    color: teal;
+    font-weight: bold;
+    background-color: lavender;
+}
+
+/* a[aria-expanded="true"] {
+    background-color: green;
+    color: white;
+} */
+
+#bdSidebar ul li a {
+    padding: 10px;
+    display: block;
+}
+
+#bdSidebar ul li a:hover {
+    color: #7386D5;
+    background: #fff;
+}
+
+
+
+.sidebar-navlink {
+    box-shadow: 0px 1px 0px lightblue;
+}
+
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+.dropdown-toggle::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+
+ul li a {
+    /* font-size: 0.9em !important; */
+    padding-left: 30px !important;
+    /* background: #108fbb; */
+    border-bottom: 1px solid lightblue;
+}
+
+li a.disabled {
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+/* Styles for smaller screens */
+@media (max-width: 767px) {
+    .offcanvas-md {
+        width: 250px;
+        /* Reduced width for smaller screens */
+    }
+
+    .navbar {
+        display: none;
+    }
+}

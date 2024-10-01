@@ -1,0 +1,105 @@
+<div class="p-3">
+    <div class="form-container">
+        <h2 class="text-center text-info"> Config Form</h2>
+        <form (ngSubmit)="onSubmit()">
+
+            <!-- App Name -->
+            <div class="mb-3">
+                <label for="appName" class="form-label"><strong>App Name</strong></label>
+                <input type="text" class="form-control" id="appName" [(ngModel)]="appName" name="appName"
+                    placeholder="Enter App Name" required>
+            </div>
+
+            <!-- Define App Area (File Upload) -->
+            <div class="mb-3">
+                <label for="appArea" class="form-label"><strong>Define App Area (Upload .zip)</strong></label>
+                <input type="file" class="form-control" id="appArea" (change)="handleFileInput($event)" accept=".zip"
+                    required>
+            </div>
+
+            <!-- Base Map and Spatial Tools in One Row -->
+            <div class="d-flex mb-3 gap-5">
+                <div class="w-100 p-3 border border-1">
+                    <label class="form-label"><strong>Select Map</strong></label>
+                    <div *ngFor="let option of baseMapOptions" class="form-check">
+                        <input class="form-check-input" type="checkbox" [value]="option.value" id="{{ option.value }}">
+                        <label class="form-check-label" for="{{ option.value }}">{{ option.label }}</label>
+                    </div>
+                </div>
+
+                <div class="w-100 p-3 border border-1">
+                    <label class="form-label"><strong>Spatial Tools</strong></label>
+                    <div *ngFor="let tool of spatialTools" class="form-check">
+                        <input class="form-check-input" type="checkbox" [value]="tool.value" id="{{ tool.value }}">
+                        <label class="form-check-label" for="{{ tool.value }}">{{ tool.label }}</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Layer List (Drag and Drop with Grouping) -->
+            <div class="mb-3">
+                <label class="form-label"><strong>Layers</strong></label>
+                <div class="d-flex gap-5">
+                    <div class="w-100">
+                        <h6>Available Layers</h6>
+                        <div class="layer-list" id="layerListLeft">
+                            <div class="layer-group">
+                                <div class="form-check">
+                                    <!-- <input class="form-check-input group-check" type="checkbox" id="group1Check"> -->
+                                    <label class="form-check-label" for="group1Check"><strong>Group 1</strong></label>
+                                </div>
+                                <ul>
+                                    <li *ngFor="let layer of group1Layers" class="list-group-item draggable layer-item"
+                                        draggable="true" (dragstart)="onDragStart($event, layer)">
+                                        <!-- <input class="form-check-input layer-check" type="checkbox"
+                                            id="layer{{layer}}" /> -->
+                                        <label class="form-check-label draggable" for="layer{{layer}}">{{ layer
+                                            }}</label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="layer-group">
+                                <div class="form-check">
+                                    <!-- <input class="form-check-input group-check" type="checkbox" id="group2Check"> -->
+                                    <label class="form-check-label" for="group2Check"><strong>Group 2</strong></label>
+                                </div>
+                                <ul>
+                                    <li *ngFor="let layer of group2Layers" class="list-group-item draggable layer-item"
+                                        draggable="true" (dragstart)="onDragStart($event, layer)">
+                                        <!-- <input class="form-check-input layer-check" type="checkbox"
+                                            id="layer{{layer}}" /> -->
+                                        <label class="form-check-label draggable" for="layer{{layer}}">{{ layer
+                                            }}</label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-2 d-flex align-items-center justify-content-center">
+                        <button class="btn btn-secondary" type="button" (click)="moveLayers()">Move &raquo;</button>
+                    </div> -->
+                    <div class="w-100">
+                        <h6>Selected Layers</h6>
+                        <div class="layer-list" id="layerListRight" (drop)="onDrop($event)"
+                            (dragover)="onDragOver($event)">
+                            <ul class="list-group">
+                                <div *ngFor="let layer of selectedLayers"
+                                    class="list-group-item d-flex justify-content-between">
+                                    {{ layer }}
+                                    <button type="button" class="btn btn-danger btn-sm"
+                                        (click)="onRemoveLayer(layer)">Remove</button>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center">
+                <button type="reset" class="btn btn-warning btn-md" (click)="onReset()">Reset</button> &nbsp;
+                <button type="submit" class="btn btn-success btn-md">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>

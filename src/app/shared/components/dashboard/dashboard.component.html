@@ -3,10 +3,12 @@
     <div id="bdSidebar" class="d-flex flex-column flex-shrink-0 p-3 text-white offcanvas-md offcanvas-start"
         style="width: 250px;">
         <div class="sidebar-header text-bg-light rounded rounded-pill text-center">
-            <!-- <span class="fs-5 d-sm-inline"><img src="./assets/images/CSMLOGO.jpg" style="object-fit: cover"
-                        height="70px" class="card-img-top rounded rounded-pill" /></span> -->
-            <h3><span class="text-warning">/</span><span class="text-danger">/</span><span
-                    class="text-primary">/</span><span><em>CSM Tech.</em></span></h3>
+            <span class="fs-5 d-sm-inline">
+                <img src="./assets/images/csm_log.png" style="object-fit: cover" height="70px"
+                    class="card-img-top rounded rounded-pill" />
+            </span>
+            <!-- <h3><span class="text-warning">/</span><span class="text-danger">/</span><span
+                    class="text-primary">/</span><span><em>CSM Tech.</em></span></h3> -->
         </div>
         <hr />
         <ul class="mynav nav nav-pills flex-column mb-auto" id="menu">
@@ -17,7 +19,10 @@
             </li> -->
             <li class="nav-item">
                 <a routerLink="group" routerLinkActive="active">
-                    Create Group
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="fa-solid fa-group-arrows-rotate"></i>
+                        <span>Create Group</span>
+                    </div>
                 </a>
             </li>
             <!-- <li class="nav-item">
@@ -28,18 +33,27 @@
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" href="#geoDBDropdown" role="button" aria-expanded="false"
                     aria-controls="geoDBDropdown">
-                    Geo DB
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="fa-solid fa-table"></i>
+                        <span> Geo DB</span>
+                    </div>
                 </a>
                 <div class="collapse" id="geoDBDropdown">
                     <ul class="nav flex-column ms-3">
                         <li class="nav-item">
                             <a routerLink="new-data" routerLinkActive="active">
-                                New Data
+                                <div class="d-flex align-items-center gap-2">
+                                    <i class="fa-solid fa-file-import"></i>
+                                    <span>New Data</span>
+                                </div>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a routerLink="append" routerLinkActive="active">
-                                Append
+                                <div class="d-flex align-items-center gap-2">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                    <span>Append</span>
+                                </div>
                             </a>
                         </li>
                     </ul>
@@ -47,17 +61,34 @@
             </li>
             <li class="nav-item">
                 <a routerLink="layer" routerLinkActive="active">
-                    Layers
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="fa-solid fa-layer-group"></i>
+                        <span>Layers</span>
+                    </div>
                 </a>
             </li>
             <li class="nav-item">
                 <a routerLink="style" routerLinkActive="active">
-                    Style Creation
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="fa-solid fa-palette"></i>
+                        <span>Style Creation</span>
+                    </div>
                 </a>
             </li>
             <li class="nav-item">
                 <a routerLink="preview" routerLinkActive="active">
-                    Layer Preview
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="fa-solid fa-map-location-dot"></i>
+                        <span>Layer Preview</span>
+                    </div>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="config" routerLinkActive="active">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="fa-solid fa-gears"></i>
+                        <span>App Config</span>
+                    </div>
                 </a>
             </li>
         </ul>
@@ -99,7 +130,7 @@
                 </div>
             </nav>
 
-            <div class="mt-4 ms-5 me-5">
+            <div>
                 <router-outlet></router-outlet>
             </div>
         </div>

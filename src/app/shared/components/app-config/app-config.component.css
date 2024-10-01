@@ -1,0 +1,73 @@
+.container {
+    max-width: 900px;
+
+}
+
+.list-group {
+    min-height: 150px;
+
+    border: 1px dashed #ccc;
+    padding: 10px;
+}
+
+.form-container {
+    /* margin-top: 30px; */
+    background-color: whitesmoke;
+    padding: 20px;
+    border-radius: 8px;
+    /* box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); */
+}
+
+.layer-list {
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    padding: 10px;
+    height: 180px;
+    overflow-y: auto;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+/* ul li {
+    margin-left: 5%;
+} */
+
+.layer-group {
+    margin-bottom: 10px;
+}
+
+.layer-group ul {
+    padding-left: 0;
+}
+
+.layer-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.remove-btn {
+    cursor: pointer;
+    color: red;
+    margin-left: auto;
+    font-size: larger;
+    font-weight: bold;
+}
+
+.draggable {
+    cursor: move;
+    margin-left: 5%;
+}
+
+/* Adjust the alignment of the checkbox and label */
+.layer-item input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+/* Style for the group checkboxes */
+.group-check {
+    margin-right: 5px;
+}

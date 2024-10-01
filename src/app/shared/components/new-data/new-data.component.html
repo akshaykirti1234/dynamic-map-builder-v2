@@ -15,26 +15,27 @@
             </h4>
             <hr> -->
             <div class="w-50">
-                <form [formGroup]="layerForm" (ngSubmit)="onLayerSubmit()">
+                <form [formGroup]="tableForm" (ngSubmit)="onLayerSubmit()">
                     <!-- <div class="mb-3 text-center text-danger">
                         <span><strong>Location Name: India</strong></span>
                     </div> -->
                     <div class="mb-3">
                         <label class="form-label">Group Name</label>
-                        <select class="form-select">
+                        <select class="form-select" formControlName="group_id">
                             <option value="" selected>-Select-</option>
+                            <option *ngFor="let group of groups" [value]="group.id">{{group.name}}</option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="layerName" class="form-label">Table Name</label>
-                        <input type="text" class="form-control" id="layerName" formControlName="layerName" required>
+                        <input type="text" class="form-control" id="layerName" formControlName="tableName" required>
                     </div>
                     <div class="mb-3">
                         <label for="layerZipFile" class="form-label">Upload Shp File</label>
                         <input type="file" class="form-control" (change)="onLayerFileSelected($event)"
                             id="layerZipFile">
                     </div>
-                    <button type="submit" class="btn btn-success w-25" [disabled]="layerForm.invalid">Submit</button>
+                    <button type="submit" class="btn btn-success w-25" [disabled]="tableForm.invalid">Submit</button>
                 </form>
             </div>
         </div>
@@ -55,11 +56,11 @@
             </thead>
             <tbody>
                 <tr *ngFor="let layer of layers">
-                    <td>{{layer.name}}</td>
-                    <td>{{layer.name}}</td>
-                    <td>{{layer.name}}</td>
-                    <td>{{layer.name}}</td>
-                    <td>{{layer.name}}</td>
+                    <td>{{layer.group_id}}</td>
+                    <td>{{layer.table_name}}</td>
+                    <td>{{layer.createdon | date:'medium'}}</td>
+                    <td>{{layer.updatedon | date:'medium'}}</td>
+                    <td>{{layer.isvalid}}</td>
                     <td class="text-center"><button class="btn btn-primary">Update</button>
                         &nbsp;
                         <button class="btn btn-danger">Delete</button>

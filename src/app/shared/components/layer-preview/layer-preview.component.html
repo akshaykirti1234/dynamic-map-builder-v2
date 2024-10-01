@@ -1,1 +1,33 @@
-<p>layer-preview works!</p>
+<div id="map" class="map-container"></div>
+
+<!-- Dropdown for selecting layers -->
+<!-- <div class="layer-dropdown">
+    <button class="dropdown-button" (click)="toggleDropdown()">Layers</button>
+    <div *ngIf="dropdownVisible" class="dropdown-content">
+        <ul>
+            <li *ngFor="let layer of layers">{{ layer }}</li>
+        </ul>
+    </div>
+</div> -->
+
+<div class="layer-dropdown d-flex gap-3">
+    <button class="btn btn-primary btn-sm" (click)="toggleDropdown('checkbox')">Checkbox Layers</button>
+    <button class="btn btn-primary btn-sm" (click)="toggleDropdown('list')">DropdownLayers</button>
+</div>
+
+<!-- Dropdown for Checkbox Layers -->
+<div *ngIf="dropdownVisible && activeDropdown === 'checkbox'" class="dropdown-content">
+    <ul>
+        <li *ngFor="let layer of checkboxLayers">
+            <input type="checkbox" [id]="layer" [value]="layer">
+            <label [for]="layer">{{ layer }}</label>
+        </li>
+    </ul>
+</div>
+
+<!-- Dropdown for List Layers -->
+<div *ngIf="dropdownVisible && activeDropdown === 'list'" class="dropdown-content">
+    <ul>
+        <li *ngFor="let layer of listLayers">{{ layer }}</li>
+    </ul>
+</div>

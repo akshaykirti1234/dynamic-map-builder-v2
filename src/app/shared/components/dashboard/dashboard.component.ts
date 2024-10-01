@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { DashboardService } from '../../services/dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,29 +10,9 @@ export class DashboardComponent implements OnInit {
 
   public region: any;
 
-  constructor(private fb: FormBuilder, private dashboardService: DashboardService) { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.getRegion();
-  }
-
-
-  //Check Region Availability
-  public getRegion() {
-    this.dashboardService.getRegion().subscribe({
-      next: (response) => {
-        console.log(response.body);
-        if (response.body != null)
-          if (response.body.length > 0) {
-            this.region = response.body;
-          } else {
-            this.region = []
-          }
-      },
-      error: (error) => {
-        console.log(error);
-      }
-    });
   }
 
 }

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
-import { AreaOfInterestService } from '../../services/area-of-interest.service';
 
 @Component({
   selector: 'app-boundary',
@@ -13,7 +12,7 @@ export class BoundaryComponent {
   public regionForm!: any;
   public boundaries: any;
 
-  constructor(private fb: FormBuilder, private areaOfInerest: AreaOfInterestService) { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.regionForm = this.fb.group({
@@ -57,26 +56,26 @@ export class BoundaryComponent {
 
   public onRegionSubmit(): void {
     if (this.regionForm.valid) {
-      this.areaOfInerest.saveRegion(this.regionForm.value).subscribe({
-        next: (response) => {
-          console.log(response.body);
-          Swal.fire({
-            icon: 'success',
-            title: 'Success',
-            confirmButtonText: 'OK'
-          });
-          // this.getRegion();
-        },
-        error: (error) => {
-          console.log(error);
-          Swal.fire({
-            title: 'Error!',
-            text: error.error,
-            icon: 'error',
-            confirmButtonText: 'OK'
-          });
-        }
-      });
+      // this.areaOfInerest.saveRegion(this.regionForm.value).subscribe({
+      //   next: (response) => {
+      //     console.log(response.body);
+      //     Swal.fire({
+      //       icon: 'success',
+      //       title: 'Success',
+      //       confirmButtonText: 'OK'
+      //     });
+      //     // this.getRegion();
+      //   },
+      //   error: (error) => {
+      //     console.log(error);
+      //     Swal.fire({
+      //       title: 'Error!',
+      //       text: error.error,
+      //       icon: 'error',
+      //       confirmButtonText: 'OK'
+      //     });
+      //   }
+      // });
     }
   }
 

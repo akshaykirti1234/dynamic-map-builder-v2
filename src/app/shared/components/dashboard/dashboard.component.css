@@ -63,7 +63,7 @@
     width: 100%;
     display: block;
     border-radius: 0px;
-    padding: 8px 5px;
+    /* padding: 8px 5px; */
     /* font-size: medium; */
 }
 
@@ -109,7 +109,7 @@ a[data-toggle="collapse"] {
 
 ul li a {
     /* font-size: 0.9em !important; */
-    padding-left: 30px !important;
+    /* padding-left: 30px !important; */
     /* background: #108fbb; */
     border-bottom: 1px solid lightblue;
 }
@@ -118,6 +118,11 @@ li a.disabled {
     pointer-events: none;
     opacity: 0.8;
 }
+
+/* #geoDBDropdown ul li {
+    list-style: disc;
+    margin-left: 10%;
+} */
 
 /* Styles for smaller screens */
 @media (max-width: 767px) {

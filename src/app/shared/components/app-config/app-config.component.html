@@ -1,6 +1,6 @@
 <div class="p-3">
     <div class="form-container">
-        <h2 class="text-center text-info"> Config Form</h2>
+        <h2 class="text-center text-info">Config Form</h2>
         <form (ngSubmit)="onSubmit()">
 
             <!-- App Name -->
@@ -45,14 +45,11 @@
                         <div class="layer-list" id="layerListLeft">
                             <div class="layer-group">
                                 <div class="form-check">
-                                    <!-- <input class="form-check-input group-check" type="checkbox" id="group1Check"> -->
                                     <label class="form-check-label" for="group1Check"><strong>Group 1</strong></label>
                                 </div>
                                 <ul>
                                     <li *ngFor="let layer of group1Layers" class="list-group-item draggable layer-item"
                                         draggable="true" (dragstart)="onDragStart($event, layer)">
-                                        <!-- <input class="form-check-input layer-check" type="checkbox"
-                                            id="layer{{layer}}" /> -->
                                         <label class="form-check-label draggable" for="layer{{layer}}">{{ layer
                                             }}</label>
                                     </li>
@@ -60,14 +57,11 @@
                             </div>
                             <div class="layer-group">
                                 <div class="form-check">
-                                    <!-- <input class="form-check-input group-check" type="checkbox" id="group2Check"> -->
                                     <label class="form-check-label" for="group2Check"><strong>Group 2</strong></label>
                                 </div>
                                 <ul>
                                     <li *ngFor="let layer of group2Layers" class="list-group-item draggable layer-item"
                                         draggable="true" (dragstart)="onDragStart($event, layer)">
-                                        <!-- <input class="form-check-input layer-check" type="checkbox"
-                                            id="layer{{layer}}" /> -->
                                         <label class="form-check-label draggable" for="layer{{layer}}">{{ layer
                                             }}</label>
                                     </li>
@@ -75,21 +69,64 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="col-md-2 d-flex align-items-center justify-content-center">
-                        <button class="btn btn-secondary" type="button" (click)="moveLayers()">Move &raquo;</button>
-                    </div> -->
+
+                    <!-- Selected Dropdown Layer (Dynamically add fields) -->
                     <div class="w-100">
-                        <h6>Selected Layers</h6>
-                        <div class="layer-list" id="layerListRight" (drop)="onDrop($event)"
+                        <h6>Selected Dropdown Layers</h6>
+                        <div class="layer-list" id="dropdownLayerList" (drop)="onDropDropdown($event)"
                             (dragover)="onDragOver($event)">
-                            <ul class="list-group">
-                                <div *ngFor="let layer of selectedLayers"
-                                    class="list-group-item d-flex justify-content-between">
-                                    {{ layer }}
+                            <div *ngFor="let layer of selectedDropdownLayers; let i = index"
+                                class="mb-3 border p-3 rounded">
+                                <!-- Selected Layer Name -->
+                                <p class="text-center"><strong>{{ layer.layerName }}</strong></p>
+                                <!-- Use d-flex and gap-3 to align fields in one line -->
+                                <div class="d-flex align-items-center gap-3">
+
+                                    <!-- Labeling Name Field -->
+                                    <div class="flex-grow-1">
+                                        <input type="text" class="form-control" [(ngModel)]="layer.nameField"
+                                            name="nameField{{i}}" placeholder="Enter Name">
+                                    </div>
+
+                                    <!-- Layer Name Dropdown (New Field) -->
+                                    <div class="flex-grow-1">
+                                        <select class="form-select" [(ngModel)]="layer.nameFieldDropdown"
+                                            name="nameFieldDropdown{{i}}">
+                                            <option *ngFor="let nameOption of nameDropdownOptions" [value]="nameOption">
+                                                {{ nameOption }}
+                                            </option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Value Dropdown -->
+                                    <div class="flex-grow-1">
+                                        <select class="form-select" [(ngModel)]="layer.valueField"
+                                            name="valueField{{i}}">
+                                            <option *ngFor="let value of dropdownOptions" [value]="value">{{ value }}
+                                            </option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Remove Button -->
                                     <button type="button" class="btn btn-danger btn-sm"
-                                        (click)="onRemoveLayer(layer)">Remove</button>
+                                        (click)="removeDropdownLayer(i)">?</button>
                                 </div>
-                            </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Selected Checkbox Layers (Multiple can be selected) -->
+                    <div class="w-75">
+                        <h6>Selected Checkbox Layers</h6>
+                        <div class="layer-list" id="checkboxLayerList" (drop)="onDropCheckbox($event)"
+                            (dragover)="onDragOver($event)">
+                            <div *ngFor="let layer of checkboxLayers"
+                                class="form-check d-flex align-items-center gap-2">
+                                <input class="form-check-input" type="checkbox" [value]="layer" id="{{ layer }}">
+                                <label class="form-check-label flex-grow-1" for="{{ layer }}">{{ layer }}</label>
+                                <button type="button" class="btn btn-danger btn-sm"
+                                    (click)="onRemoveCheckboxLayer(layer)">?</button>
+                            </div>
                         </div>
                     </div>
                 </div>

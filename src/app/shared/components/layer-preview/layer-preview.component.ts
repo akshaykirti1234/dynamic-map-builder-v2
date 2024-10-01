@@ -10,12 +10,10 @@ import { OSM, XYZ } from 'ol/source';
 })
 export class LayerPreviewComponent implements OnInit {
   private map!: Map;
-  public layers: any[] = [];
+  checkboxLayers: any[] = [];
+  dropDownLayers: any[] = [];
   public dropdownVisible = false; // Track dropdown visibility
   activeDropdown: string | null = null; // To track which dropdown is active
-
-  checkboxLayers = ['Layer 1', 'Layer 2', 'Layer 3'];
-  listLayers = ['Layer A', 'Layer B', 'Layer C'];
 
   ngOnInit(): void {
     // Initialize the map with a base layer (OSM)
@@ -28,7 +26,7 @@ export class LayerPreviewComponent implements OnInit {
       ],
       view: new View({
         center: [0, 0], // Center of the map
-        zoom: 2,        // Default zoom
+        zoom: 2,        // Default zoom level
       })
     });
 
@@ -38,11 +36,15 @@ export class LayerPreviewComponent implements OnInit {
 
   // Method to load layers from session storage
   private loadLayersFromSession(): void {
-    const storedLayers = sessionStorage.getItem('layers');
-    if (storedLayers) {
-      this.layers = JSON.parse(storedLayers);
+    const checkboxLayers = sessionStorage.getItem('checkboxLayers');
+    const dropDownLayers = sessionStorage.getItem('dropDownLayers');
 
-      this.layers.forEach((layer: any) => {
+    // Parse and load checkbox and dropdown layers
+    if (checkboxLayers && dropDownLayers) {
+      this.checkboxLayers = JSON.parse(checkboxLayers);
+      this.dropDownLayers = JSON.parse(dropDownLayers);
+
+      this.checkboxLayers.forEach((layer: any) => {
         if (layer.type === 'TileLayer') {
           const tileLayer = new TileLayer({
             source: new XYZ({
@@ -55,13 +57,13 @@ export class LayerPreviewComponent implements OnInit {
     }
   }
 
-  // Toggle dropdown based on the clicked button
+  // Toggle dropdown visibility based on the clicked button
   toggleDropdown(dropdownType: string) {
     if (this.activeDropdown === dropdownType) {
       // If the same dropdown is clicked again, close it
       this.dropdownVisible = !this.dropdownVisible;
     } else {
-      // Switch to the other dropdown and ensure it is visible
+      // Switch to the other dropdown and ensure it's visible
       this.activeDropdown = dropdownType;
       this.dropdownVisible = true;
     }

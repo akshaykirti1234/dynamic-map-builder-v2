@@ -8,45 +8,56 @@
     </div>
     <!-- Form for Add/Edit -->
     <div *ngIf="mode === 'add'">
+
+
         <div class="mt-4 border border-1 border-black p-3 bg-success-subtle">
+            <div class="w-100 text-center">
+                <h2>Create Layer</h2>
+            </div>
+            <hr>
             <!-- style="height: calc(100vh - 180px);" -->
             <!-- <h4 class="text-white p-2 rounded" style="background-color: teal;">
                 Upload Layer Zip File
             </h4>
             <hr> -->
             <div class="w-50">
-                <form [formGroup]="layerForm">
+                <form [formGroup]="layerForm" (ngSubmit)="onLayerSubmit()">
                     <!-- <div class="mb-3 text-center text-danger">
                     <span><strong>Location Name: India</strong></span>
                 </div> -->
                     <div class="mb-3">
                         <label class="form-label">Group Name</label>
-                        <select class="form-select">
+                        <select class="form-select" formControlName="group_id" (change)="onGroupChange($event)">
                             <option value="" selected>-Select-</option>
+                            <option *ngFor="let group of groups" [value]="group.id">{{group.name}}</option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="layerName" class="form-label">Table Name</label>
-                        <select class="form-select">
+                        <select class="form-select" formControlName="table_id" (change)="onTableChange($event)">
                             <option value="" selected>-Select-</option>
+                            <option *ngFor="let table of tables" [value]="table.id">{{table.dynamic_tbl_name}}</option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="layerZipFile" class="form-label">Layer Name</label>
-                        <input type="text" class="form-control" (change)="onLayerFileSelected($event)"
-                            id="layerZipFile">
+                        <input type="text" class="form-control" id="layerZipFile" formControlName="layer_name">
                     </div>
                     <div class="mb-3">
                         <label for="layerName" class="form-label">Add Style</label>
                         <div class="row">
                             <div class="col-8">
-                                <select class="form-select">
-                                    <option value="" selected>-Select-</option>
+                                <select class="form-select" [(ngModel)]="selectedStyle" formControlName="style_name">
+                                    <!-- <option value="" disabled>-Select-</option> -->
+                                    <option value="">-Select-</option>
+                                    <option *ngFor="let style of styles" [value]="style">{{ style }}</option>
                                 </select>
                             </div>
+
+                            <!-- <p>Selected Style: {{ selectedStyle }}</p> -->
                             <div class="col-4">
-                                <button routerLink="/shared/dashboard/style" class="btn btn-primary">Create new
-                                    style</button>
+                                <!-- routerLink="/shared/dashboard/style" -->
+                                <a href="#" (click)="updateStyle($event)" class="btn btn-primary">Update Style</a>
                             </div>
                         </div>
 
@@ -56,54 +67,31 @@
             </div>
         </div>
     </div>
-    <!-- List for View/Delete -->
+
     <div *ngIf="mode === 'view'" class="table-responsive mt-3">
         <table class="table table-bordered table-hover">
             <thead>
                 <tr>
-                    <th>Group Name</th>
+                    <th>Source id</th>
                     <th>Layer Name</th>
                     <!-- <th>Style</th> -->
                     <th class="text-center">Action</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Demographic Layer</td>
-                    <td>Road Layer</td>
-                    <!-- <td> <a routerLink="/shared/dashboard/style">add style</a> </td> -->
-                    <td>
-                        <div class="d-flex justify-content-center">
-                            <button class="btn btn-primary">Publish</button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Demographic Layer</td>
-                    <td>Road Layer</td>
-                    <!-- <td> <a routerLink="/shared/dashboard/style">add style</a> </td> -->
-                    <td>
-                        <div class="d-flex gap-2 justify-content-around">
-                            <div class="d-flex align-items-center">
-                                <span class="text-success">Published</span>
-                            </div>
-                            <button class="btn btn-danger">Delete</button>
-                        </div>
-                    </td>
-                </tr>
                 <tr *ngFor="let layer of layers">
-                    <td>{{layer.name}}</td>
-                    <td>{{layer.name}}</td>
-                    <td>{{layer.name}}</td>
+                    <td>{{layer.source_id}}</td>
+                    <td>{{layer.layer_name}}</td>
                     <td>
-                        <div *ngIf="layer.published" class="d-flex justify-content-center">
+                        <div *ngIf="!layer.ispublished" class="d-flex justify-content-center">
                             <button class="btn btn-primary" (click)="publishLayer(layer.id)">Publish</button>
                         </div>
-                        <div *ngIf="!layer.published" class="d-flex gap-2 justify-content-around">
+                        <div *ngIf="layer.ispublished" class="d-flex gap-2 justify-content-around">
                             <div class="d-flex align-items-center">
                                 <span class="text-success">Published</span>
                             </div>
-                            <button class="btn btn-danger" (click)="deleteLayer(layer.id)">Delete</button>
+                            <button class="btn btn-danger" (click)="deleteLayer(layer.id)"><i
+                                    class="fa-solid fa-trash-can"></i></button>
                         </div>
                     </td>
                 </tr>

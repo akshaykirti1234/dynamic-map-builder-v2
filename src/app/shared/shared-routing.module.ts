@@ -10,6 +10,7 @@ import { GroupComponent } from './components/group/group.component';
 import { NewDataComponent } from './components/new-data/new-data.component';
 import { AppendComponent } from './components/append/append.component';
 import { AppConfigComponent } from './components/app-config/app-config.component';
+import { FilterComponent } from './components/filter/filter.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -25,6 +26,7 @@ const routes: Routes = [
       { path: 'new-data', component: NewDataComponent },
       { path: 'append', component: AppendComponent },
       { path: 'config', component: AppConfigComponent },
+      { path: 'filter', component: FilterComponent },
     ]
   }
 

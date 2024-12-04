@@ -88,7 +88,7 @@ export class AppConfigComponent {
       this.selectedDropdownLayers.push({
         layerName: layer,
         nameField: '',
-        nameFieldDropdown: this.nameDropdownOptions[0], // Default to the first option
+        nameFieldDropdown: '',
         valueField: ''
       });
 

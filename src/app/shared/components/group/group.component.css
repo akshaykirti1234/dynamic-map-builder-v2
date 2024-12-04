@@ -17,5 +17,6 @@ input:focus {
 }
 
 input {
-    font-family: cursive;
+    font-family: Arial, sans-serif;
+    /* Change to a normal font family */
 }

@@ -3,22 +3,19 @@
     <div class="d-flex gap-2 col-2 ">
         <button class="btn w-50" [ngClass]="{'btn-success': mode === 'add', 'btn-danger': mode !== 'add'}"
             (click)="setMode('add')">Add</button>
-        <button class="btn  w-50" [ngClass]="{'btn-success': mode === 'view', 'btn-danger': mode !== 'view'}"
+        <button class="btn w-50" [ngClass]="{'btn-success': mode === 'view', 'btn-danger': mode !== 'view'}"
             (click)="setMode('view')">View</button>
     </div>
+
     <!-- Form for Add/Edit -->
     <div *ngIf="mode === 'add'">
         <div class="mt-4 border border-1 border-black p-3 bg-success-subtle">
-            <!-- style="height: calc(100vh - 180px);" -->
-            <!-- <h4 class="text-white p-2 rounded" style="background-color: teal;">
-                Upload Layer Zip File
-            </h4>
-            <hr> -->
+            <div class="w-100 text-center">
+                <h3>Create Table</h3>
+            </div>
+            <hr>
             <div class="w-50">
                 <form [formGroup]="tableForm" (ngSubmit)="onLayerSubmit()">
-                    <!-- <div class="mb-3 text-center text-danger">
-                        <span><strong>Location Name: India</strong></span>
-                    </div> -->
                     <div class="mb-3">
                         <label class="form-label">Group Name</label>
                         <select class="form-select" formControlName="group_id">
@@ -28,7 +25,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="layerName" class="form-label">Table Name</label>
-                        <input type="text" class="form-control" id="layerName" formControlName="tableName" required>
+                        <input type="text" class="form-control" id="layerName" formControlName="table_name" required>
                     </div>
                     <div class="mb-3">
                         <label for="layerZipFile" class="form-label">Upload Shp File</label>
@@ -40,12 +37,12 @@
             </div>
         </div>
     </div>
+
     <!-- List for View/Delete -->
     <div *ngIf="mode === 'view'" class="table-responsive mt-3">
         <table class="table table-bordered table-hover">
             <thead>
                 <tr>
-                    <!-- <th>Location Name</th> -->
                     <th>Group Name</th>
                     <th>Table Name</th>
                     <th>Created On</th>
@@ -56,14 +53,14 @@
             </thead>
             <tbody>
                 <tr *ngFor="let layer of layers">
-                    <td>{{layer.group_id}}</td>
+                    <td>{{layer.group_name}}</td>
                     <td>{{layer.table_name}}</td>
-                    <td>{{layer.createdon | date:'medium'}}</td>
-                    <td>{{layer.updatedon | date:'medium'}}</td>
+                    <td>{{layer.createdon | date: 'medium'}}</td>
+                    <td>{{layer.updatedon | date: 'medium'}}</td>
                     <td>{{layer.isvalid}}</td>
-                    <td class="text-center"><button class="btn btn-primary">Update</button>
-                        &nbsp;
-                        <button class="btn btn-danger">Delete</button>
+                    <td class="text-center">
+                        <button class="btn btn-danger" (click)="deleteLayer(layer.id)"><i
+                                class="fa-solid fa-trash-can"></i></button>
                     </td>
                 </tr>
             </tbody>

@@ -25,9 +25,8 @@ export class UploadFileService {
     });
   }
 
-  // ----------------- Delete Layer-----------------------------
   public deleteLayer(id: Number, type: Boolean): Observable<any> {
-    return this.http.delete(`${this.apiUrl}api/file/deleteLayer/${id}/${type}`, { observe: 'response' });
+    return this.http.delete(`${this.apiUrl}deleteLayer/${id}/${type}`, { observe: 'response' });
   }
 
 }

@@ -36,97 +36,98 @@
                 </div>
             </div>
 
-            <!-- Layer List (Drag and Drop with Grouping) -->
+            <!-- Layer List and Checkbox Layer in One Row -->
+            <div class="d-flex gap-5 mb-3">
+                <!-- Available Layers -->
+                <div class="w-50">
+                    <h6><strong>Available Layers</strong></h6>
+                    <div class="layer-list" id="layerListLeft">
+                        <div class="layer-group">
+                            <div class="form-check">
+                                <label class="form-check-label" for="group1Check"><strong>Group 1</strong></label>
+                            </div>
+                            <ul>
+                                <li *ngFor="let layer of group1Layers" class="list-group-item draggable layer-item"
+                                    draggable="true" (dragstart)="onDragStart($event, layer)">
+                                    <label class="form-check-label draggable" for="layer{{layer}}">{{ layer }}</label>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="layer-group">
+                            <div class="form-check">
+                                <label class="form-check-label" for="group2Check"><strong>Group 2</strong></label>
+                            </div>
+                            <ul>
+                                <li *ngFor="let layer of group2Layers" class="list-group-item draggable layer-item"
+                                    draggable="true" (dragstart)="onDragStart($event, layer)">
+                                    <label class="form-check-label draggable" for="layer{{layer}}">{{ layer }}</label>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Selected Checkbox Layers -->
+                <div class="w-50">
+                    <h6><strong>Selected Checkbox Layers</strong></h6>
+                    <div class="layer-list" id="checkboxLayerList" (drop)="onDropCheckbox($event)"
+                        (dragover)="onDragOver($event)">
+                        <div *ngFor="let layer of checkboxLayers"
+                            class="form-check d-flex align-items-center gap-2 border">&nbsp;
+                            <input class="form-check-input" type="checkbox" [value]="layer" id="{{ layer }}">
+                            <label class="form-check-label flex-grow-1" for="{{ layer }}">{{ layer }}</label>
+                            <button type="button" class="btn btn-danger btn-sm" (click)="onRemoveCheckboxLayer(layer)">
+                                Remove
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
             <div class="mb-3">
-                <label class="form-label"><strong>Layers</strong></label>
-                <div class="d-flex gap-5">
-                    <div class="w-100">
-                        <h6>Available Layers</h6>
-                        <div class="layer-list" id="layerListLeft">
-                            <div class="layer-group">
-                                <div class="form-check">
-                                    <label class="form-check-label" for="group1Check"><strong>Group 1</strong></label>
-                                </div>
-                                <ul>
-                                    <li *ngFor="let layer of group1Layers" class="list-group-item draggable layer-item"
-                                        draggable="true" (dragstart)="onDragStart($event, layer)">
-                                        <label class="form-check-label draggable" for="layer{{layer}}">{{ layer
-                                            }}</label>
-                                    </li>
-                                </ul>
+                <h6><strong>Selected Dropdown Layers</strong></h6>
+
+                <div class="layer-list" id="dropdownLayerList" (drop)="onDropDropdown($event)"
+                    (dragover)="onDragOver($event)">
+                    <div *ngFor="let layer of selectedDropdownLayers; let i = index" class="mb-3 border p-3 rounded">
+                        <!-- Selected Layer Name -->
+                        <h5 class="text-center"><strong>{{ layer.layerName }}</strong></h5>
+                        <!-- Use d-flex and gap-3 to align fields in one line -->
+                        <div class="d-flex align-items-center gap-3">
+
+                            <!-- Labeling Name Field -->
+                            <label for=""><strong> Label Name :</strong>
+                            </label>
+                            <div class="flex-grow-1">
+                                <input type="text" class="form-control" [(ngModel)]="layer.nameField"
+                                    name="nameField{{i}}" placeholder="Enter Label Name">
                             </div>
-                            <div class="layer-group">
-                                <div class="form-check">
-                                    <label class="form-check-label" for="group2Check"><strong>Group 2</strong></label>
-                                </div>
-                                <ul>
-                                    <li *ngFor="let layer of group2Layers" class="list-group-item draggable layer-item"
-                                        draggable="true" (dragstart)="onDragStart($event, layer)">
-                                        <label class="form-check-label draggable" for="layer{{layer}}">{{ layer
-                                            }}</label>
-                                    </li>
-                                </ul>
+
+                            <label for=""><strong>Name :</strong></label>
+                            <div class="flex-grow-1">
+                                <select class="form-select" [(ngModel)]="layer.nameFieldDropdown"
+                                    name="nameFieldDropdown{{i}}">
+                                    <option value="" selected>Select Name</option>
+                                    <option *ngFor="let nameOption of nameDropdownOptions" [value]="">
+                                        {{ nameOption }}
+                                    </option>
+                                </select>
                             </div>
-                        </div>
-                    </div>
 
-                    <!-- Selected Dropdown Layer (Dynamically add fields) -->
-                    <div class="w-100">
-                        <h6>Selected Dropdown Layers</h6>
-                        <div class="layer-list" id="dropdownLayerList" (drop)="onDropDropdown($event)"
-                            (dragover)="onDragOver($event)">
-                            <div *ngFor="let layer of selectedDropdownLayers; let i = index"
-                                class="mb-3 border p-3 rounded">
-                                <!-- Selected Layer Name -->
-                                <p class="text-center"><strong>{{ layer.layerName }}</strong></p>
-                                <!-- Use d-flex and gap-3 to align fields in one line -->
-                                <div class="d-flex align-items-center gap-3">
-
-                                    <!-- Labeling Name Field -->
-                                    <div class="flex-grow-1">
-                                        <input type="text" class="form-control" [(ngModel)]="layer.nameField"
-                                            name="nameField{{i}}" placeholder="Enter Name">
-                                    </div>
-
-                                    <!-- Layer Name Dropdown (New Field) -->
-                                    <div class="flex-grow-1">
-                                        <select class="form-select" [(ngModel)]="layer.nameFieldDropdown"
-                                            name="nameFieldDropdown{{i}}">
-                                            <option *ngFor="let nameOption of nameDropdownOptions" [value]="nameOption">
-                                                {{ nameOption }}
-                                            </option>
-                                        </select>
-                                    </div>
-
-                                    <!-- Value Dropdown -->
-                                    <div class="flex-grow-1">
-                                        <select class="form-select" [(ngModel)]="layer.valueField"
-                                            name="valueField{{i}}">
-                                            <option *ngFor="let value of dropdownOptions" [value]="value">{{ value }}
-                                            </option>
-                                        </select>
-                                    </div>
-
-                                    <!-- Remove Button -->
-                                    <button type="button" class="btn btn-danger btn-sm"
-                                        (click)="removeDropdownLayer(i)">?</button>
-                                </div>
+                            <label for=""><strong>Value :</strong></label>
+                            <div class="flex-grow-1">
+                                <select class="form-select" [(ngModel)]="layer.valueField" name="valueField{{i}}">
+                                    <option value="" selected>Select Value</option>
+                                    <option *ngFor="let value of dropdownOptions" [value]="value">{{ value }}
+                                    </option>
+                                </select>
                             </div>
-                        </div>
-                    </div>
 
-                    <!-- Selected Checkbox Layers (Multiple can be selected) -->
-                    <div class="w-75">
-                        <h6>Selected Checkbox Layers</h6>
-                        <div class="layer-list" id="checkboxLayerList" (drop)="onDropCheckbox($event)"
-                            (dragover)="onDragOver($event)">
-                            <div *ngFor="let layer of checkboxLayers"
-                                class="form-check d-flex align-items-center gap-2">
-                                <input class="form-check-input" type="checkbox" [value]="layer" id="{{ layer }}">
-                                <label class="form-check-label flex-grow-1" for="{{ layer }}">{{ layer }}</label>
-                                <button type="button" class="btn btn-danger btn-sm"
-                                    (click)="onRemoveCheckboxLayer(layer)">?</button>
-                            </div>
+                            <!-- Remove Button -->
+                            <button type="button" class="btn btn-danger btn-sm" (click)="removeDropdownLayer(i)">
+                                ❌
+                            </button>
                         </div>
                     </div>
                 </div>

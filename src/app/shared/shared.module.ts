@@ -13,6 +13,7 @@ import { GroupComponent } from './components/group/group.component';
 import { NewDataComponent } from './components/new-data/new-data.component';
 import { AppendComponent } from './components/append/append.component';
 import { AppConfigComponent } from './components/app-config/app-config.component';
+import { FilterComponent } from './components/filter/filter.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { AppConfigComponent } from './components/app-config/app-config.component
     GroupComponent,
     NewDataComponent,
     AppendComponent,
-    AppConfigComponent
+    AppConfigComponent,
+    FilterComponent
   ],
   imports: [
     CommonModule,

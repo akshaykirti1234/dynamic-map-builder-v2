@@ -23,6 +23,7 @@
                     <!-- <div class="mb-3 text-danger text-center">
                         <span><strong>Boundary Name: India</strong></span>
                     </div> -->
+                    <input type="hidden" formControlName="id">
                     <div class="mb-3">
                         <label class="form-label">Group Name</label>
                         <input type="text" class="form-control" formControlName="name">
@@ -49,10 +50,11 @@
                     <td>{{group.name}}</td>
                     <td>{{ group.created_on | date: 'medium' }}</td>
                     <td>{{ group.updated_on | date: 'medium' }}</td>
-                    <td class="text-center"><button class="btn btn-primary"
-                            (click)="updateGroup(group.id)">Update</button>
+                    <td class="text-center"><button class="btn btn-primary" (click)="updateGroup(group.id,group)"><i
+                                class="fa-solid fa-pen-to-square"></i></button>
                         &nbsp;
-                        <button class="btn btn-danger" (click)="deleteGroup(group.id)">Delete</button>
+                        <button class="btn btn-danger" (click)="deleteGroup(group.id)"><i
+                                class="fa-solid fa-trash-can"></i></button>
                     </td>
                 </tr>
             </tbody>

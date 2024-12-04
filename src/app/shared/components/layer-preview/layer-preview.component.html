@@ -1,35 +1,46 @@
-<div id="map" class="map-container"></div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-9 p-0">
+            <div id="map" class="border border-danger border-start-0 border-bottom-0 border-top-0"
+                style="width: 100%; height: 584px;"></div>
+        </div>
+        <div class="col-3 p-0">
+            <div class="" *ngIf="publishedLayers.length > 0">
+                <h4 class="text-center text-secondary pt-2">Legends</h4>
+                <hr>
+                <div>
+                    <ol *ngFor="let layer of publishedLayers">
+                        <ng-container *ngIf="isLayerPublished(layer.name)">
+                            <input type="checkbox" [checked]="layerVisibility[layer.name]"
+                                (change)="toggleLayerVisibility(layer.name, $event)" />&nbsp;
+                            <strong>{{ layerTitles[layer.name] }}</strong>
+                            <img [src]="getLegendUrl(layer.name)" alt="{{ layerTitles[layer.name] }} Legend"
+                                *ngIf="layerVisibility[layer.name]" /> </ng-container>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<!-- Dropdown for selecting layers -->
-<!-- <div class="layer-dropdown">
-    <button class="dropdown-button" (click)="toggleDropdown()">Layers</button>
-    <div *ngIf="dropdownVisible" class="dropdown-content">
-        <ul>
-            <li *ngFor="let layer of layers">{{ layer }}</li>
-        </ul>
+
+
+
+
+
+
+
+<!-- <div class="col-md-1">
+    <div class="legend-container layer-dropdown" *ngIf="publishedLayers.length > 0">
+        <h4 class="text-center text-secondary">Legends</h4>
+        <hr>
+        <div>
+            <ol *ngFor="let layer of publishedLayers">
+                <ng-container *ngIf="isLayerPublished(layer.name)">
+                    <strong>{{ layerTitles[layer.name] }}</strong>
+                    <img [src]="getLegendUrl(layer.name)" alt="{{ layerTitles[layer.name] }} Legend" />
+                </ng-container>
+            </ol>
+        </div>
     </div>
 </div> -->
-
-<div class="layer-dropdown d-flex gap-3">
-    <button class="btn btn-primary btn-sm" (click)="toggleDropdown('checkbox')">Checkbox Layers</button>
-    <button class="btn btn-primary btn-sm" (click)="toggleDropdown('list')">DropdownLayers</button>
-</div>
-
-<!-- Dropdown for Checkbox Layers -->
-<div *ngIf="dropdownVisible && activeDropdown === 'checkbox'" class="dropdown-content">
-    <ul>
-        <li *ngFor="let layer of checkboxLayers">
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" [id]="layer" [value]="layer">
-                <label [for]="layer" class="form-check-label">{{ layer }}</label>
-            </div>
-        </li>
-    </ul>
-</div>
-
-<!-- Dropdown for List Layers -->
-<div *ngIf="dropdownVisible && activeDropdown === 'list'" class="dropdown-content">
-    <ul>
-        <li *ngFor="let layer of dropDownLayers">{{ layer.layerName }}</li>
-    </ul>
-</div>

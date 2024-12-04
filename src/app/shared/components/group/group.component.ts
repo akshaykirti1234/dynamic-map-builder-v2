@@ -21,6 +21,7 @@ export class GroupComponent implements OnInit {
 
   ngOnInit(): void {
     this.groupForm = this.fb.group({
+      id: [''],
       name: ['', Validators.required]
     })
   }
@@ -28,6 +29,7 @@ export class GroupComponent implements OnInit {
   setMode(mode: string) {
     this.mode = mode;
     if (mode === 'add') {
+      this.groupForm.reset();
     } else {
       this.getAllGroups();
     }
@@ -35,13 +37,18 @@ export class GroupComponent implements OnInit {
 
 
   public saveGroupForm() {
+
     if (this.groupForm.valid) {
       this.groupService.createGroup(this.groupForm.value).subscribe({
         next: (response) => {
+          console.log(response);
+
           Swal.fire({
             icon: 'success',
-            title: 'Group created successfully'
+            title: response.body.message
           })
+          this.groupForm.reset();
+          this.setMode('view')
         },
         error: (err) => {
           console.log(err.error);
@@ -57,6 +64,7 @@ export class GroupComponent implements OnInit {
     }
   }
 
+
   public getAllGroups(): void {
     this.groupService.getAllGroups().subscribe({
       next: (response) => {
@@ -70,12 +78,31 @@ export class GroupComponent implements OnInit {
     })
   }
 
-  public updateGroup(id: any) {
-
+  public updateGroup(id: any, group: any) {
+    this.setMode('add')
+    this.groupForm.patchValue({
+      id: group.id,
+      name: group.name
+    });
   }
-  public deleteGroup(id: any) {
 
+  public deleteGroup(id: number) {
+    this.groupService.deleteGroups(id).subscribe({
+      next: (response) => {
+        this.getAllGroups();
+        Swal.fire({
+          icon: 'success',
+          title: 'Group deleted successfully'
+        })
+      },
+      error: (err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          // text: JSON.stringify(err.error.detail)
+        })
+        console.error('Error deleting group:', err);
+      }
+    });
   }
-
-
 }

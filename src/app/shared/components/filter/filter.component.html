@@ -1,0 +1,269 @@
+<div class="p-1">
+    <!-- Operation Buttons -->
+    <div class="d-flex gap-2 col-2 ">
+        <button class="btn w-50" [ngClass]="{'btn-success': mode === 'add', 'btn-danger': mode !== 'add'}"
+            (click)="setMode('add')">Create</button>
+        <button class="btn  w-50" [ngClass]="{'btn-success': mode === 'view', 'btn-danger': mode !== 'view'}"
+            (click)="setMode('view')">View</button>
+    </div>
+    <!-- Form for Add/Edit -->
+    <div *ngIf="mode === 'add'">
+        <div class="mt-4 border border-1 border-black p-3 bg-success-subtle">
+            <div class="w-100">
+                <form [formGroup]="form" (ngSubmit)="onSubmit()" class="p-4 border rounded bg-light">
+                    <!-- Filter Name -->
+                    <div class="mb-3">
+                        <label for="filterName" class="form-label">Filter Name</label>
+                        <input id="filterName" formControlName="filterName" type="text" class="form-control" />
+                    </div>
+
+                    <!-- Description -->
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea id="description" formControlName="description" class="form-control"></textarea>
+                    </div>
+
+                    <!-- Type Selection (Radio buttons) -->
+                    <div class="mb-3">
+                        <label class="form-label">Type</label>
+                        <div class="d-flex gap-4 align-items-center">
+                            <div class="form-check">
+                                <input type="radio" formControlName="type" value="dropdown"
+                                    (change)="onTypeChange('dropdown')" id="dropdownType" class="form-check-input" />
+                                <label class="form-check-label" for="dropdownType">Dropdown</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" formControlName="type" value="checkbox"
+                                    (change)="onTypeChange('checkbox')" id="checkboxType" class="form-check-input" />
+                                <label class="form-check-label" for="checkboxType">Checkbox</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" formControlName="type" value="search"
+                                    (change)="onTypeChange('search')" id="searchType" class="form-check-input" />
+                                <label class="form-check-label" for="searchType">Search</label>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Conditional Fields for Dropdown Type -->
+                    <div *ngIf="showDropdownFields" class="mt-3 p-3">
+                        <div class="row border p-2">
+                            <div class="mb-3 col-md-6">
+                                <label for="targetTable" class="form-label">Target Table</label>
+                                <select id="targetTable" formControlName="targetTable" class="form-select">
+                                    <option value="" selected>Select Target Table</option>
+                                    <option value="table1">Table 1</option>
+                                    <option value="table2">Table 2</option>
+                                </select>
+                            </div>
+                            <div class="mb-3 col-md-6">
+                                <label for="targetLayer" class="form-label">Target Layer</label>
+                                <select id="targetLayer" formControlName="targetLayer" class="form-select">
+                                    <option value="" selected>Select Target Layer</option>
+                                    <option value="layer1">Layer 1</option>
+                                    <option value="layer2">Layer 2</option>
+                                </select>
+                            </div>
+                            <div class="mb-3 col-md-6">
+                                <label for="labelingName" class="form-label">Labeling Name</label>
+                                <input id="labelingName" formControlName="labelingName" type="text"
+                                    class="form-control" />
+                            </div>
+
+                            <div class="mb-3 col-md-6">
+                                <label for="name" class="form-label">Name</label>
+                                <select id="name" formControlName="name" class="form-select">
+                                    <option value="" selected>Select Name</option>
+                                    <option value="name1">Name 1</option>
+                                    <option value="name2">Name 2</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3 col-md-6">
+                                <label for="value" class="form-label">Value</label>
+                                <select id="value" formControlName="value" class="form-select">
+                                    <option value="" selected>Select Value</option>
+                                    <option value="value1">Value 1</option>
+                                    <option value="value2">Value 2</option>
+                                </select>
+                            </div>
+
+
+                        </div>
+
+                        <!-- Check Layer to Activate -->
+                        <div class="mt-3">
+                            <div class="row">
+                                <div class="col-md-6 border p-2">
+                                    <label class="form-label">Check Layers to Activate</label>
+                                    <div class="form-check">
+                                        <input type="checkbox" formControlName="layer1Activate" id="layer1Activate"
+                                            class="form-check-input" />
+                                        <label for="layer1Activate" class="form-check-label">Layer 1</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="checkbox" formControlName="layer2Activate" id="layer2Activate"
+                                            class="form-check-input" />
+                                        <label for="layer2Activate" class="form-check-label">Layer 2</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="checkbox" formControlName="layer1Activate" id="layer1Activate"
+                                            class="form-check-input" />
+                                        <label for="layer1Activate" class="form-check-label">Layer 3</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="checkbox" formControlName="layer2Activate" id="layer2Activate"
+                                            class="form-check-input" />
+                                        <label for="layer2Activate" class="form-check-label">Layer 4</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 border">
+                                    <label class="form-label">Check Layers to Deactivate</label>
+                                    <div class="form-check">
+                                        <input type="checkbox" formControlName="layer1Deactivate" id="layer1Deactivate"
+                                            class="form-check-input" />
+                                        <label for="layer1Deactivate" class="form-check-label">Layer 1</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="checkbox" formControlName="layer2Deactivate" id="layer2Deactivate"
+                                            class="form-check-input" />
+                                        <label for="layer2Deactivate" class="form-check-label">Layer 2</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="checkbox" formControlName="layer1Deactivate" id="layer1Deactivate"
+                                            class="form-check-input" />
+                                        <label for="layer1Deactivate" class="form-check-label">Layer 3</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="checkbox" formControlName="layer2Deactivate" id="layer2Deactivate"
+                                            class="form-check-input" />
+                                        <label for="layer2Deactivate" class="form-check-label">Layer 4</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Conditional Fields for Checkbox Type -->
+                    <div *ngIf="showCheckboxFields" class="mt-3">
+                        <div class="row">
+                            <!-- Left Column: Target Table, Target Field, and Target Layer -->
+                            <div class="col-md-6 border mb-3 p-3">
+
+                                <div class="mb-3">
+                                    <label for="targetTableCheckbox" class="form-label">Target Table</label>
+                                    <select id="targetTableCheckbox" formControlName="targetTable" class="form-select">
+                                        <option value="" selected>Select Target Table</option>
+                                        <option value="table1">Table 1</option>
+                                        <option value="table2">Table 2</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="targetField" class="form-label">Target Field</label>
+                                    <select id="targetField" formControlName="targetField" class="form-select">
+                                        <option value="" selected>Select Target Field</option>
+                                        <option value="field1">Field 1</option>
+                                        <option value="field2">Field 2</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="targetLayer" class="form-label">Target Layer</label>
+                                    <select id="targetLayer" formControlName="targetLayer" class="form-select">
+                                        <option value="" selected>Select Target Layer</option>
+                                        <option value="layer1">Layer 1</option>
+                                        <option value="layer2">Layer 2</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Right Column: Layer Fields (Checkboxes) -->
+                            <div class="col-md-6  border p-3">
+                                <div class="mb-3">
+                                    <label class="form-label">Layer Fields</label>
+                                    <div class="form-check">
+                                        <input type="checkbox" formControlName="layer1" id="layer1"
+                                            class="form-check-input" />
+                                        <label for="layer1" class="form-check-label">Layer 1</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="checkbox" formControlName="layer2" id="layer2"
+                                            class="form-check-input" />
+                                        <label for="layer2" class="form-check-label">Layer 2</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="checkbox" formControlName="layer3" id="layer3"
+                                            class="form-check-input" />
+                                        <label for="layer3" class="form-check-label">Layer 3</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Conditional Fields for Search Type -->
+                    <div *ngIf="showSearchFields" class="mt-3 border p-3">
+                        <div class="row">
+                            <div class="mb-3 col-md-5">
+                                <label for="layerName" class="form-label">Enter Layer Name</label>
+                                <input id="layerName" formControlName="layerName" type="text" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Submit and Reset buttons -->
+                    <div class="text-center mt-3">
+                        <button type="submit" class="btn btn-primary">Submit</button>&nbsp;
+                        <button type="button" class="btn btn-secondary" (click)="onReset()">Reset</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- List for View/Delete -->
+    <div *ngIf="mode === 'view'" class="table-responsive mt-3">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Filter Name</th>
+                    <th>Type</th>
+                    <th>Target Table</th>
+                    <th class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Filter 1</td>
+                    <td>Dropdown</td>
+                    <td>Table 1</td>
+                    <td class="text-center">
+                        <button class="btn btn-primary btn-sm">Edit</button>&nbsp;
+                        <button class="btn btn-danger btn-sm">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Filter 2</td>
+                    <td>Checkbox</td>
+                    <td>Table 2</td>
+                    <td class="text-center">
+                        <button class="btn btn-primary btn-sm">Edit</button>&nbsp;
+                        <button class="btn btn-danger btn-sm">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Filter 3</td>
+                    <td>Searchbox</td>
+                    <td>Table 3</td>
+                    <td class="text-center">
+                        <button class="btn btn-primary btn-sm">Edit</button>&nbsp;
+                        <button class="btn btn-danger btn-sm">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

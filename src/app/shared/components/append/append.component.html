@@ -9,26 +9,32 @@
     <!-- Form for Add/Edit -->
     <div *ngIf="mode === 'add'">
         <div class="mt-4 border border-1 border-black p-3 bg-success-subtle">
+            <div class="w-100 text-center">
+                <h3>Append Data</h3>
+            </div>
+            <hr>
             <!-- style="height: calc(100vh - 180px);" -->
             <!-- <h4 class="text-white p-2 rounded" style="background-color: teal;">
                 Upload Layer Zip File
             </h4>
             <hr> -->
             <div class="w-50">
-                <form [formGroup]="layerForm" (ngSubmit)="onLayerSubmit()">
+                <form [formGroup]="appendForm" (ngSubmit)="onLayerSubmit()">
                     <!-- <div class="mb-3 text-center text-danger">
                         <span><strong>Location Name: India</strong></span>
                     </div> -->
                     <div class="mb-3">
                         <label class="form-label">Group Name</label>
-                        <select class="form-select">
+                        <select class="form-select" formControlName="group_id" (change)="onGroupChange($event)">
                             <option value="" selected>-Select-</option>
+                            <option *ngFor="let group of groups" [value]="group.id">{{group.name}}</option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="layerName" class="form-label">Table Name</label>
-                        <select class="form-select">
+                        <select class="form-select" formControlName="table_id">
                             <option value="" selected>-Select-</option>
+                            <option *ngFor="let table of tables" [value]="table.id">{{table.dynamic_tbl_name}}</option>
                         </select>
                     </div>
                     <div class="mb-3">
@@ -36,7 +42,7 @@
                         <input type="file" class="form-control" (change)="onLayerFileSelected($event)"
                             id="layerZipFile">
                     </div>
-                    <button type="submit" class="btn btn-success w-25" [disabled]="layerForm.invalid">Submit</button>
+                    <button type="submit" class="btn btn-success w-25">Submit</button>
                 </form>
             </div>
         </div>
@@ -46,7 +52,6 @@
         <table class="table table-bordered table-hover">
             <thead>
                 <tr>
-                    <!-- <th>Location Name</th> -->
                     <th>Group Name</th>
                     <th>Table Name</th>
                     <th>Created On</th>
@@ -57,14 +62,14 @@
             </thead>
             <tbody>
                 <tr *ngFor="let layer of layers">
-                    <td>{{layer.name}}</td>
-                    <td>{{layer.name}}</td>
-                    <td>{{layer.name}}</td>
-                    <td>{{layer.name}}</td>
-                    <td>{{layer.name}}</td>
-                    <td class="text-center"><button class="btn btn-primary">Update</button>
-                        &nbsp;
-                        <button class="btn btn-danger">Delete</button>
+                    <td>{{layer.group_name}}</td>
+                    <td>{{layer.table_name}}</td>
+                    <td>{{layer.createdon | date: 'medium'}}</td>
+                    <td>{{layer.updatedon | date: 'medium'}}</td>
+                    <td>{{layer.isvalid}}</td>
+                    <td class="text-center">
+                        <button class="btn btn-danger" (click)="deleteLayer(layer.id)"><i
+                                class="fa-solid fa-trash-can"></i></button>
                     </td>
                 </tr>
             </tbody>
